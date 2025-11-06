@@ -1,5 +1,4 @@
 aiofiles==24.1.0
-aiogram==3.22.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.12.15
 aiosignal==1.4.0
@@ -32,7 +31,6 @@ pycparser==2.23
 pydantic==2.12.3
 pydantic-settings==2.11.0
 pydantic_core==2.41.4
-pygame==2.6.1
 PyJWT==2.10.1
 pyTelegramBotAPI==4.29.1
 python-dateutil==2.9.0.post0
