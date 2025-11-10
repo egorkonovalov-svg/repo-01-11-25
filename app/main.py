@@ -40,7 +40,7 @@ def create_user(user: UserSchema):
 @app.post("/login")
 def login(credentials: UserLoginSchema):
     if credentials.email in users and credentials.password == credentials.password:
-        token = security.create_access_token(uid=credentials.email)
+        token = security.create_access_token(uid='12345')
         return {"access_token": token}
     raise HTTPException(status_code=401, detail="Invalid username or password")
 
