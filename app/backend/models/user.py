@@ -1,0 +1,13 @@
+from sqlalchemy import Column, String, Boolean
+from sqlalchemy.orm import relationship
+from base import BaseModel
+
+
+class User(BaseModel):
+    __tablename__ = "users"
+    UserName = Column(String, unique=True)
+    Email = Column(String())
+    # PasswordHash = Column(LargeBinary())
+    Password = Column(String(), nullable=False)
+    Name = Column(String())
+    # Age = Column(Integer())
