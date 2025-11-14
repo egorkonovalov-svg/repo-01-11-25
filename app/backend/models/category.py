@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy import Column, String, Text, Enum, Integer, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
-from base import BaseModel
+from base import Base
 
 
 class TransactionType(enum.Enum):
@@ -9,7 +9,7 @@ class TransactionType(enum.Enum):
     EXPENSE = "expense"
 
 
-class Category(BaseModel):
+class Category(Base):
     __tablename__ = "categories"
 
     name = Column(String(100), nullable=False)

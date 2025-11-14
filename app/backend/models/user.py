@@ -1,9 +1,9 @@
 from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
-from base import BaseModel
+from base import Base
 
 
-class User(BaseModel):
+class User(Base):
     __tablename__ = "users"
     UserName = Column(String, unique=True)
     Email = Column(String())

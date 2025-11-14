@@ -1,9 +1,9 @@
 from sqlalchemy import Column, String, Float, Date, Integer, ForeignKey, Boolean, Text
 from sqlalchemy.orm import relationship
-from base import BaseModel
+from base import Base
 
 
-class Goal(BaseModel):
+class Goal(Base):
     __tablename__ = "goals"
 
     name = Column(String(100), nullable=False)

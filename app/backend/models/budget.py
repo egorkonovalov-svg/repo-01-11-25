@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy import Column, String, Float, Date, Integer, ForeignKey, Enum, Boolean
 from sqlalchemy.orm import relationship
-from base import BaseModel
+from base import Base
 
 
 class BudgetPeriod(enum.Enum):
@@ -11,7 +11,7 @@ class BudgetPeriod(enum.Enum):
     YEARLY = "yearly"
 
 
-class Budget(BaseModel):
+class Budget(Base):
     __tablename__ = "budgets"
 
     name = Column(String(100), nullable=False)

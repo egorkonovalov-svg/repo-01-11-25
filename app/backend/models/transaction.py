@@ -1,10 +1,10 @@
 from sqlalchemy import Column, Float, String, Date, Integer, ForeignKey, Enum
 from sqlalchemy.orm import relationship
-from base import BaseModel
+from base import Base
 from category import TransactionType
 
 
-class Transaction(BaseModel):
+class Transaction(Base):
     __tablename__ = "transactions"
 
     amount = Column(Float, nullable=False)
