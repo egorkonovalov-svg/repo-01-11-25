@@ -23,5 +23,11 @@
 ```bash
 git clone https://github.com/egorkonovalov-svg/repo-01-11-25.git
 ```
-
-пока все...
+2. установка вирутального окружения
+```bash
+python3 -m venv venv 
+```
+3. установка зависимостей
+```bash
+pip install -r requirements.txt
+```
