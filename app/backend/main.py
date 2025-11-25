@@ -1,31 +1,37 @@
 import os
 
+# from app.backend.routers import transaction_router, budget_router, category_router, goal_router, user_router
+from routers.user_router import *
+from routers.transaction_router import *
+from routers.budget_router import *
+from routers.goal_router import *
+from routers.category_router import *
+
+from database import *
+from fastapi.middleware.cors import CORSMiddleware
+import asyncio
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 import uvicorn
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
-# from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
-from authx import AuthX, AuthXConfig
 
-app = FastAPI(title="")
-#
-#
-#
-#
-# @app.post("/users")
-# def create_user(user: UserSchema):
-#     users.append(user)
-#     return {"ok": True, "message":"user created"}
-#
-# @app.post("/login")
-# def login(credentials: UserLoginSchema):
-#     if credentials.email in users and credentials.password == credentials.password:
-#         token = security.create_access_token(uid='12345')
-#         return {"access_token": token}
-#     raise HTTPException(status_code=401, detail="Invalid username or password")
-#
-# @app.get("/protected")
-# def protected():
-#     ...
+
+
+app = FastAPI(title='finance-app', root_path='/api/v1')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.include_router(user_router)
+app.include_router(transaction_router)
+app.include_router(budget_router)
+app.include_router(category_router)
+app.include_router(goal_router)
+
+
 
 
 

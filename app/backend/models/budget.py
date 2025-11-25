@@ -13,7 +13,7 @@ class BudgetPeriod(enum.Enum):
 
 class Budget(Base):
     __tablename__ = "budgets"
-
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)
     amount = Column(Float, nullable=False)
     period = Column(Enum(BudgetPeriod), default=BudgetPeriod.MONTHLY)

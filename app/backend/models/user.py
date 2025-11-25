@@ -5,9 +5,8 @@ from base import Base
 
 class User(Base):
     __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
     UserName = Column(String, unique=True)
     Email = Column(String())
     PasswordHash = Column(LargeBinary())
-    # Password = Column(String(), nullable=False)
     Name = Column(String())
-    # Age = Column(Integer())
