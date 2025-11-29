@@ -1,10 +1,7 @@
-from app.backend.models.user import *
-from app.backend.database import *
-from app.backend.crypt_module import *
-from datetime import datetime
+from ..models.user import *
 from pydantic import BaseModel
 
-# Схема запроса для регистрации
+# Запрос регистрации
 class RegisterRequest(BaseModel):
     name: str
     email: str
@@ -29,8 +26,8 @@ async def register_user(data: RegisterRequest) -> str:
         )
         session.add(new_user)
         await session.commit()
-    jwttoken = await create_jwt_token(email=data.email)
-    return jwttoken
+    jwt_token = await create_jwt_token(email=data.email)
+    return jwt_token
 
 
 async def get_password_hash(email: str) -> bytes:

@@ -1,23 +1,14 @@
-import os
-
-# from app.backend.routers import transaction_router, budget_router, category_router, goal_router, user_router
-from routers.user_router import *
+# from src.backend.routers import transaction_router, budget_router, category_router, goal_router, user_router
+from routers.goal_router import *
 from routers.transaction_router import *
 from routers.budget_router import *
-from routers.goal_router import *
 from routers.category_router import *
-
-from database import *
+from routers.user_router import *
 from fastapi.middleware.cors import CORSMiddleware
-import asyncio
-from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 import uvicorn
-from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
-
-
-app = FastAPI(title='finance-app', root_path='/api/v1')
+app = FastAPI(title='finance-src', root_path='/api/v1')
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
