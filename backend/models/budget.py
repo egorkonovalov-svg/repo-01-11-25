@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy import Column, String, Float, Date, Integer, ForeignKey, Enum, Boolean
 from sqlalchemy.orm import relationship
-from base import Base
+from models.base import Base
 
 
 class BudgetPeriod(enum.Enum):
