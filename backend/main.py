@@ -1,4 +1,9 @@
+
 # from src.backend.routers import transaction_router, budget_router, category_router, goal_router, user_router
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from routers.goal_router import *
 from routers.transaction_router import *
 from routers.budget_router import *

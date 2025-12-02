@@ -1,4 +1,9 @@
-from services.user_service import *
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+
+from ..services.user_service import *
 from fastapi import HTTPException, APIRouter
 
 user_router = APIRouter(prefix='/auth')
