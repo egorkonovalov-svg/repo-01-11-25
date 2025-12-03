@@ -37,12 +37,12 @@ if is_local_development():
     load_dotenv(os.path.join(backend_dir, '.env'))
 
 
-DB_HOST = os.getenv('DB_HOST', 'localhost')
-DB_PORT = os.getenv('DB_PORT', '5432')
-DB_USER = os.getenv('DB_USER', 'postgres')
-DB_PASSWORD = os.getenv('DB_PASSWORD', 'postgres')
-DB_NAME = os.getenv('DB_NAME', 'finances')
-SECRET_TOKEN = os.getenv('SECRET_TOKEN', 'your-secret-key-change-in-production')
+DB_HOST = os.getenv('DB_HOST')
+DB_PORT = os.getenv('DB_PORT')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
+SECRET_TOKEN = os.getenv('SECRET_TOKEN')
 
 def get_db_url():
         return (f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@"
