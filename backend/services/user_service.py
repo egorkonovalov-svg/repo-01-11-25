@@ -2,16 +2,17 @@ from models.user import *
 from crypt_module import create_password_hash, create_jwt_token, is_password_correct
 from database import async_session_maker
 from sqlalchemy import select
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 # Запрос регистрации
 class RegisterRequest(BaseModel):
     name: str
-    email: str
+    username: str
+    email: EmailStr
     password: str
 
 class LoginRequest(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 
@@ -32,7 +33,7 @@ async def register_user(data: RegisterRequest) -> str:
     return jwt_token
 
 
-async def get_password_hash(email: str) -> bytes:
+async def get_password_hash(email: str) -> bytes | None:
     """
     SELECT passwordhash FROM users WHERE Email == $email
     """
@@ -40,12 +41,14 @@ async def get_password_hash(email: str) -> bytes:
         query_select = select(User).where(User.Email == email)
         result = await session.execute(query_select)
         user_data = result.scalars().first()
+        if user_data is None:
+            return None
         return user_data.PasswordHash
 
 
 async def login_check(data: LoginRequest) -> str:
     passwordhash = await get_password_hash(email=data.email)
-    if not passwordhash:
+    if passwordhash is None:
         return 'error'
     success = await is_password_correct(data.password, passwordhash)
     if success:

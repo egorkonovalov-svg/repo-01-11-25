@@ -2,20 +2,18 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from fastapi import Depends, HTTPException, Header
+from fastapi import Depends, HTTPException, Cookie
 from crypt_module import verify_jwt_token
 from services.user_service import get_user_info
 
 
-async def get_current_user_id(authorization: str = Header(None)) -> int:
-    """Получить user_id из JWT токена"""
-    if not authorization:
-        raise HTTPException(status_code=401, detail="Authorization header missing")
+async def get_current_user_id(access_token: str = Cookie(None)) -> int:
+    """Получить user_id из JWT токена из cookie"""
+    if not access_token:
+        raise HTTPException(status_code=401, detail="Authentication cookie missing")
     
     try:
-        # Формат: "Bearer <token>"
-        token = authorization.replace("Bearer ", "").strip()
-        payload = await verify_jwt_token(token)
+        payload = await verify_jwt_token(access_token)
         email = payload.get("sub")
         
         if not email:
