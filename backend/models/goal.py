@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Float, Date, Integer, ForeignKey, Boolean, Text
 from sqlalchemy.orm import relationship
-from base import Base
+from models.base import Base
 
 
 class Goal(Base):

@@ -2,6 +2,7 @@
 # from src.backend.routers import transaction_router, budget_router, category_router, goal_router, user_router
 import sys
 import os
+from contextlib import asynccontextmanager
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from routers.goal_router import *
@@ -12,14 +13,27 @@ from routers.user_router import *
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 import uvicorn
+from database import init_db, close_db
 
-app = FastAPI(title='finance-src', root_path='/api/v1')
+# Импортируем все модели, чтобы они были зарегистрированы в Base.metadata
+from models import user, transaction, budget, category, goal
+
+
+@asynccontextmanager
+async def lifespan(app):
+    await init_db()
+    yield
+    await close_db()
+
+
+app = FastAPI(title='finance-src', root_path='/api/v1', lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    # allow_cookies=True,
 )
 app.include_router(user_router)
 app.include_router(transaction_router)
@@ -28,9 +42,5 @@ app.include_router(category_router)
 app.include_router(goal_router)
 
 
-
-
-
 if __name__ == "__main__":
-    # import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

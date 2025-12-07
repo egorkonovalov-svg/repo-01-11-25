@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, LargeBinary, Integer
-from backend.models.base import Base
+from sqlalchemy.orm import relationship
+from models.base import Base
 
 
 class User(Base):
@@ -9,3 +10,9 @@ class User(Base):
     Email = Column(String())
     PasswordHash = Column(LargeBinary())
     Name = Column(String())
+    
+    # Relationships
+    transactions = relationship("Transaction", back_populates="user")
+    budgets = relationship("Budget", back_populates="user")
+    goals = relationship("Goal", back_populates="user")
+    categories = relationship("Category", back_populates="user")
