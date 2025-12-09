@@ -10,6 +10,7 @@
 * Фреймворки: FastAPI, SQLAlchemy
 * Библиотеки: Alembic, PyDantic, uvicorn, authx...
 * Базы данных: PostgreSQL + asyncpg
+* Тестирование: pytest + httpx
 
 [//]: # (* Другие инструменты)
 
