@@ -29,7 +29,18 @@ git clone https://github.com/egorkonovalov-svg/repo-01-11-25.git
 ```bash
 python3 -m venv venv 
 ```
-3. запуск через докер
+3. файл .env
+   -Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=xxxx
+DB_PASSWORD=xxxx
+DB_NAME=xxxx
+ -JWT Secret Token
+SECRET_TOKEN=xxxx
+
+
+5. запуск через докер
 ```bash
 docker-compose up --build
 ```
