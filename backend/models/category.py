@@ -1,8 +1,18 @@
 import enum
 from sqlalchemy import Column, String, Text, Enum, Integer, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.annotation import annotated_classes
 from models.base import Base
 from models.transaction import TransactionType
+# from enum import Enum
+
+# # class CategoryType(enum.Enum):
+# #     WORK = "work"
+# #     PERSONAL = "personal"
+# #     FAMILY = "family"
+# #     HEALTH = "health"
+# #     EDUCATION = "education"
+# #     ENTERTAINMENT = "entertainment"
 
 
 class Category(Base):

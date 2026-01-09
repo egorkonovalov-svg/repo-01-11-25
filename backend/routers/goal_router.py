@@ -17,7 +17,7 @@ from services.goal_service import (
 )
 from dependencies import get_current_user_id
 
-goal_router = APIRouter(prefix='/goal')
+goal_router = APIRouter(prefix='/api/v1/goal')
 
 
 @goal_router.post("/", response_model=GoalResponse)

@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block title %}Цели - Финансовое приложение{% endblock %}
+
+{% block content %}
+<h2>Цели</h2>
+
+<div class="card">
+    <div class="card-header">Добавить цель</div>
+    <form id="goal-form" action="/api/v1/goal/" method="POST">
+        <div class="form-group">
+            <label>Название</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Целевая сумма</label>
+            <input type="number" name="target_amount" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label>Срок</label>
+            <input type="date" name="deadline" required>
+        </div>
+        <div class="form-group">
+            <label>Описание</label>
+            <textarea name="description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+<div class="card" style="margin-top: 2rem;">
+    <div class="card-header">Добавить сумму к цели</div>
+    <form id="add-amount-form" onsubmit="event.preventDefault(); addAmountToGoal();">
+        <div class="form-group">
+            <label>Цель</label>
+            <select id="goal-select" required>
+                {% for goal in goals %}
+                <option value="{{ goal.id }}">{{ goal.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Сумма</label>
+            <input type="number" id="amount-input" step="0.01" required>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+</div>
+
+<div class="table-container" style="margin-top: 2rem;">
+    <table>
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Прогресс</th>
+                <th>Целевая сумма</th>
+                <th>Срок</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if goals %}
+                {% for goal in goals %}
+                <tr>
+                    <td><strong>{{ goal.name }}</strong><br><small>{{ goal.description or '' }}</small></td>
+                    <td>
+                        <strong>{{ "%.2f"|format(goal.current_amount) }} ₽</strong>
+                        <div style="background: white; border: 1px solid black; height: 20px; margin-top: 0.5rem; width: 200px;">
+                            <div style="background: black; height: 100%; width: {{ (goal.current_amount / goal.target_amount * 100)|min(100) }}%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
+                                {{ "%.0f"|format((goal.current_amount / goal.target_amount * 100)|min(100)) }}%
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ "%.2f"|format(goal.target_amount) }} ₽</td>
+                    <td>{{ goal.deadline }}</td>
+                    <td>
+                        <span style="padding: 2px 5px; border: 1px solid black; font-size: 0.85rem;">
+                            {{ 'Выполнено' if goal.is_completed else 'В процессе' }}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-small" onclick="deleteItem('/api/v1/goal/{{ goal.id }}', 'цель')">Удалить</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6" class="empty-state">Нет целей</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+async function addAmountToGoal() {
+    const goalId = document.getElementById('goal-select').value;
+    const amount = document.getElementById('amount-input').value;
+    
+    try {
+        const response = await fetch(`/api/v1/goal/${goalId}/add-amount?amount=${amount}`, {
+            method: 'POST',
+            credentials: 'include'
+        });
+        
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Ошибка при добавлении суммы');
+        }
+    } catch (error) {
+        alert('Ошибка: ' + error.message);
+    }
+}
+</script>
+{% endblock %}
+
+
+
+

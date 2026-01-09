@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}Главная - Финансовое приложение{% endblock %}
+
+{% block content %}
+<h2>Добро пожаловать!</h2>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Доходы</h3>
+        <div class="amount">{{ "%.2f"|format(summary.income) }} ₽</div>
+    </div>
+    <div class="stat-card">
+        <h3>Расходы</h3>
+        <div class="amount">{{ "%.2f"|format(summary.expense) }} ₽</div>
+    </div>
+    <div class="stat-card">
+        <h3>Баланс</h3>
+        <div class="amount">{{ "%.2f"|format(summary.balance) }} ₽</div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div class="card">
+        <div class="card-header">Активные цели</div>
+        {% if goals %}
+            <ul style="list-style: none; padding: 0;">
+                {% for goal in goals %}
+                <li style="padding: 0.5rem; border-bottom: 1px solid black;">
+                    <strong>{{ goal.name }}</strong><br>
+                    <small>Прогресс: {{ "%.2f"|format(goal.current_amount) }} / {{ "%.2f"|format(goal.target_amount) }} ₽</small>
+                    <div style="background: white; border: 1px solid black; height: 10px; margin-top: 0.5rem;">
+                        <div style="background: black; height: 100%; width: {{ (goal.current_amount / goal.target_amount * 100)|min(100) }}%;"></div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">Нет активных целей</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <div class="card-header">Активные бюджеты</div>
+        {% if budgets %}
+            <ul style="list-style: none; padding: 0;">
+                {% for budget in budgets %}
+                <li style="padding: 0.5rem; border-bottom: 1px solid black;">
+                    <strong>{{ budget.name }}</strong><br>
+                    <small>Лимит: {{ "%.2f"|format(budget.amount) }} ₽</small><br>
+                    <small>Период: {{ budget.period }}</small>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">Нет активных бюджетов</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+

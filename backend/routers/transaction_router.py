@@ -19,7 +19,7 @@ from services.transaction_service import (
 from models.transaction import TransactionType
 from dependencies import get_current_user_id
 
-transaction_router = APIRouter(prefix='/transaction')
+transaction_router = APIRouter(prefix='/api/v1/transaction')
 
 
 @transaction_router.post("/", response_model=TransactionResponse)

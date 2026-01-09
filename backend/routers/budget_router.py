@@ -16,7 +16,7 @@ from services.budget_service import (
 )
 from dependencies import get_current_user_id
 
-budget_router = APIRouter(prefix='/budget')
+budget_router = APIRouter(prefix='/api/v1/budget')
 
 
 @budget_router.post("/", response_model=BudgetResponse)

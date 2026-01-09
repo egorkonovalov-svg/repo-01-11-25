@@ -7,7 +7,7 @@ from services.user_service import *
 from dependencies import get_current_user_id
 from fastapi import HTTPException, APIRouter, Depends, Response
 
-user_router = APIRouter(prefix='/auth')
+user_router = APIRouter(prefix='/api/v1/auth')
 
 @user_router.post("/register")
 async def register(data: RegisterRequest, response: Response):

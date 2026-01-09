@@ -17,7 +17,7 @@ from services.category_service import (
 from models.transaction import TransactionType
 from dependencies import get_current_user_id
 
-category_router = APIRouter(prefix='/category')
+category_router = APIRouter(prefix='/api/v1/category')
 
 
 @category_router.post("/", response_model=CategoryResponse)
