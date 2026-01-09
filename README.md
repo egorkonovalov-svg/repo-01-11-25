@@ -7,10 +7,11 @@
 ## Технологии
 Список используемых технологий и инструментов:
 * Язык программирования: Python
-* Фреймворки: FastAPI, SQLAlchemy
+* Фреймворки: FastAPI, SQLAlchemy, jinja2
 * Библиотеки: Alembic, PyDantic, uvicorn, authx...
 * Базы данных: PostgreSQL + asyncpg
 * Тестирование: pytest + httpx
+* Контейнеры: Docker
 
 [//]: # (* Другие инструменты)
 
@@ -28,7 +29,7 @@ git clone https://github.com/egorkonovalov-svg/repo-01-11-25.git
 ```bash
 python3 -m venv venv 
 ```
-3. установка зависимостей
+3. запуск через докер
 ```bash
-pip install -r requirements.txt
+docker-compose up --build
 ```
