@@ -66,9 +66,10 @@
                     <td><strong>{{ goal.name }}</strong><br><small>{{ goal.description or '' }}</small></td>
                     <td>
                         <strong>{{ "%.2f"|format(goal.current_amount) }} ₽</strong>
+                        {% set progress = [goal.current_amount / goal.target_amount * 100, 100]|min %}
                         <div style="background: white; border: 1px solid black; height: 20px; margin-top: 0.5rem; width: 200px;">
-                            <div style="background: black; height: 100%; width: {{ (goal.current_amount / goal.target_amount * 100)|min(100) }}%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
-                                {{ "%.0f"|format((goal.current_amount / goal.target_amount * 100)|min(100)) }}%
+                            <div class="progress-bar" style="width: {{ progress }}%;">
+                                {{ "%.0f"|format(progress) }}%
                             </div>
                         </div>
                     </td>

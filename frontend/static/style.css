@@ -254,6 +254,17 @@ tbody tr:nth-child(even) {
     color: #666;
 }
 
+/* Progress bar */
+.progress-bar {
+    background: black;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-menu {

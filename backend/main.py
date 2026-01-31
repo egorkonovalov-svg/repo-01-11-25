@@ -21,10 +21,10 @@ from database import init_db, close_db
 from dependencies import get_current_user_id
 from crypt_module import verify_jwt_token
 from services.user_service import get_user_info
-
-# Импортируем все модели, чтобы они были зарегистрированы в Base.metadata
 from models import user, transaction, budget, category, goal
-
+from services.transaction_service import get_transactions_summary
+from services.goal_service import get_user_goals
+from services.budget_service import get_user_budgets
 
 @asynccontextmanager
 async def lifespan(app):
@@ -98,10 +98,6 @@ async def home(request: Request):
         user_id = await get_user_id_from_cookie(request.cookies.get("access_token"))
     except:
         return RedirectResponse(url="/login", status_code=303)
-    
-    from services.transaction_service import get_transactions_summary
-    from services.goal_service import get_user_goals
-    from services.budget_service import get_user_budgets
     
     summary = await get_transactions_summary(user_id, None, None)
     goals = await get_user_goals(user_id, None)
