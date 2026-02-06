@@ -45,6 +45,6 @@ DB_NAME = os.getenv('DB_NAME')
 SECRET_TOKEN = os.getenv('SECRET_TOKEN')
 
 def get_db_url():
-        return (f"postgresql://{DB_USER}:{DB_PASSWORD}@"
+        return (f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@"
                 f"{DB_HOST}:{DB_PORT}/{DB_NAME}")
 DATABASE_URL = get_db_url()
