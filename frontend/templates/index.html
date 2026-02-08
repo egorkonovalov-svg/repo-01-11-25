@@ -30,7 +30,7 @@
                     <strong>{{ goal.name }}</strong><br>
                     <small>Прогресс: {{ "%.2f"|format(goal.current_amount) }} / {{ "%.2f"|format(goal.target_amount) }} ₽</small>
                     <div style="background: white; border: 1px solid black; height: 10px; margin-top: 0.5rem;">
-                        <div style="background: black; height: 100%; width: {{ (goal.current_amount / goal.target_amount * 100)|min(100) }}%;"></div>
+                        <div style="background: black; height: 100%; width: {{ [goal.current_amount / goal.target_amount * 100, 100]|min }}%;"></div>
                     </div>
                 </li>
                 {% endfor %}
